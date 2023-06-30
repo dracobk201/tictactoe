@@ -18,6 +18,7 @@ public class WelcomeView : MonoBehaviour
     {
         playButton.onClick.AddListener(PlayGame);
         quitButton.onClick.AddListener(QuitGame);
+        gameplayView.gameObject.SetActive(false);
     }
 
     private void OnDisable()

@@ -18,11 +18,18 @@ public class CellView : MonoBehaviour
     private void OnEnable()
     {
         cellButton.onClick.AddListener(OnButtonClicked);
+        Initialize();
     }
-
+    
     private void Start()
     {
+        Initialize();
+    }
+
+    private void Initialize()
+    {
         cellImage.color = transparent;
+        isActive = true;
     }
 
     private void OnDisable()

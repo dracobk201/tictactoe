@@ -3,9 +3,12 @@ using UnityEngine.UI;
 
 public class GameplayView : MonoBehaviour
 {
+    [SerializeField] private GameplayController gameplayController;
     [SerializeField] private WelcomeView welcomeView;
     [SerializeField] private Button quitButton;
     [SerializeField] private GameObject modalWin;
+    [SerializeField] private GameObject modalLose;
+    [SerializeField] private GameObject modalDraw;
     [SerializeField] private CellView[] cells;
     [Space(10), Header("Audio")]
     [SerializeField] private AudioSource sfxAudioSource;
@@ -20,6 +23,7 @@ public class GameplayView : MonoBehaviour
         {
             cell.OnCellClicked += OnCellClickHandler;
         }
+        InitGame();
     }
 
     private void OnDisable()
@@ -33,13 +37,28 @@ public class GameplayView : MonoBehaviour
 
     public void InitGame()
     {
-
+        gameplayController.Setup(this);
+        modalWin.SetActive(false);
+        modalLose.SetActive(false);
+        modalDraw.SetActive(false);
     }
 
-    private void ShowWinner()
+    public void ShowWinner()
     {
         PlaySFX(sfxWin);
         modalWin.SetActive(true);
+    }
+
+    public void ShowLoser()
+    {
+        PlaySFX(sfxLose);
+        modalLose.SetActive(true);
+    }
+
+    public void ShowDraw()
+    {
+        PlaySFX(sfxClick);
+        modalDraw.SetActive(true);
     }
 
     private void ExitGame()
@@ -58,5 +77,6 @@ public class GameplayView : MonoBehaviour
     {
         PlaySFX(sfxClick);
         Debug.Log($"Clicked on {cellNumber}");
+        gameplayController.MarkSpecificCell(cellNumber, Mark.X);
     }
 }

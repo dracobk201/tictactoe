@@ -8,12 +8,10 @@ public class CellView : MonoBehaviour
     [SerializeField] private Button cellButton;
     [SerializeField] private Image cellImage;
     [SerializeField] private bool isActive = true;
-    public bool IsActive => isActive;
     [SerializeField] private int cellNumber;
-    public int CellNumber => cellNumber;
 
-    private static Color transparent = new Color(1f, 1f, 1f, 0f);
-    private static Color opaque = new Color(1f, 1f, 1f, 1f);
+    private Color transparent = new Color(1f, 1f, 1f, 0f);
+    private Color opaque = new Color(1f, 1f, 1f, 1f);
 
     private void OnEnable()
     {
@@ -37,7 +35,12 @@ public class CellView : MonoBehaviour
         cellButton.onClick.RemoveListener(OnButtonClicked);
     }
 
-    private void OnButtonClicked()
+    public void SetSprite(Sprite spriteToSet)
+    {
+        cellImage.sprite = spriteToSet;
+    }
+
+    public void OnButtonClicked()
     {
         if (!isActive)
         {

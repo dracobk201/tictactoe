@@ -9,12 +9,19 @@ public class GameplayView : MonoBehaviour
     [SerializeField] private GameObject modalWin;
     [SerializeField] private GameObject modalLose;
     [SerializeField] private GameObject modalDraw;
+    [SerializeField] private Image modalActualTurn;
     [SerializeField] private CellView[] cells;
+    [SerializeField] private Sprite markXSprite;
+    [SerializeField] private Sprite markOSprite;
+    [SerializeField] private Sprite turnXSprite;
+    [SerializeField] private Sprite turnOSprite;
     [Space(10), Header("Audio")]
     [SerializeField] private AudioSource sfxAudioSource;
     [SerializeField] private AudioClip sfxClick;
     [SerializeField] private AudioClip sfxWin;
     [SerializeField] private AudioClip sfxLose;
+    private static Color transparent = new Color(1f, 1f, 1f, 0f);
+    private static Color opaque = new Color(1f, 1f, 1f, 1f);
 
     private void OnEnable()
     {
@@ -22,6 +29,7 @@ public class GameplayView : MonoBehaviour
         foreach (var cell in cells)
         {
             cell.OnCellClicked += OnCellClickHandler;
+            cell.SetSprite(markXSprite);
         }
         InitGame();
     }
@@ -37,10 +45,11 @@ public class GameplayView : MonoBehaviour
 
     public void InitGame()
     {
-        gameplayController.Setup(this);
         modalWin.SetActive(false);
         modalLose.SetActive(false);
         modalDraw.SetActive(false);
+        modalActualTurn.color = transparent;
+        gameplayController.Setup(this);
     }
 
     public void ShowWinner()
@@ -61,11 +70,30 @@ public class GameplayView : MonoBehaviour
         modalDraw.SetActive(true);
     }
 
+    public void ShowCurentTurn(Mark currentTurn)
+    {
+        modalActualTurn.color = opaque;
+        if (currentTurn.Equals(Mark.X))
+        {
+            modalActualTurn.sprite = turnXSprite;
+        }
+        else if (currentTurn.Equals(Mark.O))
+        {
+            modalActualTurn.sprite = turnOSprite;
+        }
+    }
+
     private void ExitGame()
     {
         PlaySFX(sfxClick);
         gameObject.SetActive(false);
         welcomeView.gameObject.SetActive(true);
+    }
+
+    public void ActivateCell(int index)
+    {
+        cells[index].SetSprite(markOSprite);
+        cells[index].OnButtonClicked();
     }
 
     private void PlaySFX(AudioClip clip)
@@ -76,7 +104,6 @@ public class GameplayView : MonoBehaviour
     private void OnCellClickHandler(int cellNumber)
     {
         PlaySFX(sfxClick);
-        Debug.Log($"Clicked on {cellNumber}");
         gameplayController.MarkSpecificCell(cellNumber, Mark.X);
     }
 }

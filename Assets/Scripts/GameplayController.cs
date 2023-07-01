@@ -1,84 +1,83 @@
-using System;
 using UnityEngine;
 
 public class GameplayController : MonoBehaviour
 {
     private GameplayView gameplayView;
-    private Mark[] markGrid;
+    private EnemyBehaviour enemy;
+    private GameGrid gameGrid;
+    private Mark actualTurn;
 
     public void Setup(GameplayView gameplayView)
     {
         this.gameplayView = gameplayView;
-        markGrid = new Mark[9];
-        Array.Fill(markGrid, Mark.Null);
+        gameGrid = new GameGrid();
+        enemy = new EnemyBehaviour(this, gameGrid);
+        actualTurn = Mark.Null;
+        ChangeTurn();
     }
 
     public void MarkSpecificCell(int index, Mark markType)
     {
-        markGrid[index] = markType;
-        CheckWinner();
+        Debug.Log($"ActualTurn: {actualTurn} - Index: {index} - Mark: {markType}");
+        if (markType != actualTurn)
+        {
+            return;
+        }
+        if (markType == Mark.O)
+        {
+            gameplayView.ActivateCell(index);
+        }
+        gameGrid.MarkCell(index, markType);
+        ChangeTurn();
+        Debug.Log($"Next Turn: {actualTurn}");
+
     }
 
-    public void CheckWinner()
+    public void ChangeTurn()
     {
-        GameResult playerResult = VerifyPlayerVictory(Mark.X);
-
-        switch (playerResult)
+        if (!CheckWinner(actualTurn))
         {
-            case GameResult.Win:
+            if (actualTurn.Equals(Mark.X))
+            {
+                actualTurn = Mark.O;
+                Invoke(nameof(PerformEnemyTurn), 1f);
+            }
+            else
+            {
+                actualTurn = Mark.X;
+            }
+            gameplayView.ShowCurentTurn(actualTurn);
+        }
+    }
+
+    private bool CheckWinner(Mark playerToVerify)
+    {
+        GameResult playerResult = GameGrid.VerifyPlayerVictory(playerToVerify);
+        Debug.Log($"{playerResult} - {playerToVerify}");
+        bool isGameOver = false;
+        if (playerResult.Equals(GameResult.Win))
+        {
+            if (actualTurn.Equals(Mark.X))
+            {
                 gameplayView.ShowWinner();
-                break;
-            case GameResult.Lose:
+                isGameOver = true;
+            }
+            else if(actualTurn.Equals(Mark.O))
+            {
                 gameplayView.ShowLoser();
-                break;
-            case GameResult.Draw:
-                gameplayView.ShowDraw();
-                break;
-            case GameResult.Continue:
-                break;
-            default:
-                break;
+                isGameOver = true;
+            }
         }
+        else if (playerResult.Equals(GameResult.Draw))
+        {
+            gameplayView.ShowDraw();
+            isGameOver = true;
+        }
+        return isGameOver;
     }
 
-    private GameResult VerifyPlayerVictory(Mark markType)
+    private void PerformEnemyTurn()
     {
-        var markAmount = Array.FindAll(markGrid, x=> x.Equals(markType));
-        var nullAmount = Array.FindAll(markGrid, x=> x.Equals(Mark.Null));
-        if (markAmount.Length >= 3)
-        {
-            if (markGrid[0].Equals(markType))
-            {
-                if (markGrid[1].Equals(markType) && markGrid[2].Equals(markType) ||
-                    markGrid[3].Equals(markType) && markGrid[6].Equals(markType) ||
-                    markGrid[4].Equals(markType) && markGrid[8].Equals(markType))
-                {
-                    return GameResult.Win;
-                }
-            }
-            else if (markGrid[2].Equals(markType))
-            {
-                if (markGrid[5].Equals(markType) && markGrid[8].Equals(markType) ||
-                    markGrid[4].Equals(markType) && markGrid[6].Equals(markType))
-                {
-                    return GameResult.Win;
-                }
-            }
-            else if (markGrid[3].Equals(markType) && markGrid[4].Equals(markType) && markGrid[5].Equals(markType) ||
-                    markGrid[0].Equals(markType) && markGrid[3].Equals(markType) && markGrid[6].Equals(markType) ||
-                    markGrid[1].Equals(markType) && markGrid[4].Equals(markType) && markGrid[7].Equals(markType))
-            {
-                return GameResult.Win;
-            }
-        }
-
-        if (nullAmount.Length == 0)
-        {
-            return GameResult.Draw;
-        }
-        else
-        {
-            return GameResult.Continue;
-        }
+        enemy.DoTurn();
     }
 }

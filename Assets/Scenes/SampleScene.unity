@@ -123,6 +123,82 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &27990144
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 27990145}
+  - component: {fileID: 27990147}
+  - component: {fileID: 27990146}
+  m_Layer: 5
+  m_Name: Turn Image
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &27990145
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 27990144}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1520838316}
+  m_RootOrder: -1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.7036934}
+  m_AnchorMax: {x: 0.5, y: 0.7036934}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 353.8999, y: 82.3105}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &27990146
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 27990144}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: -225982826, guid: 6ae6d3f8999e1cb4a90a00d77442dc6a, type: 3}
+  m_Type: 0
+  m_PreserveAspect: 1
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &27990147
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 27990144}
+  m_CullTransparentMesh: 1
 --- !u!1 &72795171
 GameObject:
   m_ObjectHideFlags: 0
@@ -1017,7 +1093,7 @@ GameObject:
   - component: {fileID: 502786548}
   - component: {fileID: 502786547}
   m_Layer: 5
-  m_Name: ImageWin
+  m_Name: Win Image
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2136,6 +2212,43 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2d2bb72eddffe5b49b44ba80061bf072, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &1520838315
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1520838316}
+  m_Layer: 5
+  m_Name: ModalActualTurn
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1520838316
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1520838315}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 27990145}
+  m_Father: {fileID: 1716879930}
+  m_RootOrder: -1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: 14.567871}
+  m_SizeDelta: {x: 0, y: 196.6669}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1538485054
 GameObject:
   m_ObjectHideFlags: 0
@@ -2148,7 +2261,7 @@ GameObject:
   - component: {fileID: 1538485057}
   - component: {fileID: 1538485056}
   m_Layer: 5
-  m_Name: ImageLose
+  m_Name: Lose Image
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2224,7 +2337,7 @@ GameObject:
   - component: {fileID: 1575471957}
   - component: {fileID: 1575471956}
   m_Layer: 5
-  m_Name: ImageWin
+  m_Name: Draw Image
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2270,7 +2383,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: -687098843, guid: 6ae6d3f8999e1cb4a90a00d77442dc6a, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 8fdd5e1b7f08e2949b8c27eaef9bfdb9, type: 3}
   m_Type: 0
   m_PreserveAspect: 1
   m_FillCenter: 1
@@ -2297,8 +2410,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1716879930}
-  - component: {fileID: 1716879933}
   - component: {fileID: 1716879934}
+  - component: {fileID: 1716879933}
   - component: {fileID: 1716879932}
   - component: {fileID: 1716879931}
   m_Layer: 5
@@ -2325,6 +2438,7 @@ RectTransform:
   - {fileID: 126944162}
   - {fileID: 2106853559}
   - {fileID: 1003010902}
+  - {fileID: 1520838316}
   m_Father: {fileID: 450902194}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2389,6 +2503,7 @@ MonoBehaviour:
   modalWin: {fileID: 126944161}
   modalLose: {fileID: 2106853558}
   modalDraw: {fileID: 1003010901}
+  modalActualTurn: {fileID: 27990146}
   cells:
   - {fileID: 2007034514}
   - {fileID: 1937356368}
@@ -2399,6 +2514,10 @@ MonoBehaviour:
   - {fileID: 262371157}
   - {fileID: 995896554}
   - {fileID: 125991283}
+  markXSprite: {fileID: 516994680, guid: 6ae6d3f8999e1cb4a90a00d77442dc6a, type: 3}
+  markOSprite: {fileID: -1281433316, guid: 6ae6d3f8999e1cb4a90a00d77442dc6a, type: 3}
+  turnXSprite: {fileID: -225982826, guid: 6ae6d3f8999e1cb4a90a00d77442dc6a, type: 3}
+  turnOSprite: {fileID: -581301010, guid: 6ae6d3f8999e1cb4a90a00d77442dc6a, type: 3}
   sfxAudioSource: {fileID: 1053348266}
   sfxClick: {fileID: 8300000, guid: 7accf2deec9c64c428eae216806f0d2c, type: 3}
   sfxWin: {fileID: 8300000, guid: 5a4f75943555c234eabbdd578253fafd, type: 3}
